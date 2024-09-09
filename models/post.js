@@ -3,6 +3,11 @@ const Sequelize = require('sequelize')
 module.exports = class Post extends Sequelize.Model{
     static init(sequelize){
         return super.init({
+            id:{
+                type:Sequelize.INTEGER,
+                autoIncrement:true,
+                primaryKey:true
+            },
             content:{
                 type:Sequelize.STRING(200),
                 allowNull:false
@@ -10,6 +15,10 @@ module.exports = class Post extends Sequelize.Model{
             img:{
                 type:Sequelize.STRING(200),
                 allowNull:true
+            },
+            writer:{
+                type:Sequelize.INTEGER,
+                allowNull:false
             }
         },{
             sequelize,
@@ -17,9 +26,5 @@ module.exports = class Post extends Sequelize.Model{
             modelName:'Post',
             tableName:'posts',
         })
-    }
-
-    static associate(db){
-        db.Post.belongsTo(db.User)
     }
 }

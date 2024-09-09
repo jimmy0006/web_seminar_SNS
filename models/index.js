@@ -15,7 +15,5 @@ db.Post=Post
 User.init(sequelize)
 Post.init(sequelize)
 
-User.associate(db)
-Post.associate(db)
 
 module.exports = db;

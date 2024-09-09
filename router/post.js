@@ -29,9 +29,33 @@ router.post('/',isLogged,async(req,res)=>{
         const post = await Post.create({
             content:req.body.content,
             img:req.body.url,
-            UserId:req.signedCookies['id']
+            writer:req.signedCookies['id']
         })
         res.redirect('/')
+    }catch(error){
+        console.error(error)
+        res.sendStatus(500)
+    }
+})
+
+router.get('/:id',async(req,res)=>{
+    try{
+        const post = await Post.findOne({
+            where:{id:req.params.id}
+        })
+        res.json(post)
+    }catch(error){
+        console.error(error)
+        res.sendStatus(500)
+    }
+})
+
+router.get('/',async(req,res)=>{
+    try{
+        const posts = await Post.findAll({
+            order:[['createdAt','DESC']]
+        })
+        res.json(posts)
     }catch(error){
         console.error(error)
         res.sendStatus(500)

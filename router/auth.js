@@ -22,6 +22,10 @@ router.post('/join',async (req,res)=>{
     res.redirect('/')
 })
 
+router.get('/join',(req,res)=>{
+    return res.send('회원가입페이지입니다.')
+})
+
 router.post('/login',async(req,res)=>{
     const { email,password } = req.body
     const user = await User.findOne({
@@ -37,6 +41,10 @@ router.post('/login',async(req,res)=>{
         }
     }
     res.send('로그인에 실패했습니다.')
+})
+
+router.get('/login',(req,res)=>{
+    return res.send('로그인페이지입니다.')
 })
 
 router.get('/logout',(req,res)=>{
